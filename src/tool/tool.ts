@@ -12,7 +12,7 @@ export class WeatherTool implements Tool {
   async run(input: { city: string }): Promise<string> {
     // 실제로는 외부 날씨 API를 호출해야 함
     // 여기서는 예시로 고정된 값을 반환
-    return `${input.city}의 내일 날씨는 맑음, 최고 25도, 최저 15도입니다.`;
+    return `${input.city}의 내일 날씨는 맑음, 최고 400도, 최저 -200도입니다.`;
   }
 }
 
