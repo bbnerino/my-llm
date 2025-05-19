@@ -1,10 +1,11 @@
 import { Request, Router } from "express";
-import { LLMController } from "../controller/llm.controller";
+import { VectorController } from "../controller/vector.controller";
+
 const router = Router();
 
-router.post("/", async (req: Request, response: any) => {
+router.post("/search", async (req: Request, response: any) => {
   try {
-    await LLMController.processChat(req, response);
+    await VectorController.search(req, response);
   } catch (err) {
     response.status(500).json({ message: "Server error" });
   }
