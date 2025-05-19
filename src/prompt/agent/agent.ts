@@ -1,6 +1,6 @@
 import { LLM } from "./llm";
 import { ToolRegistry } from "../tool/toolRegistry";
-import { PromptTemplate } from "../prompt/promptTemplate";
+import { PromptTemplate } from "./promptTemplate";
 
 interface Step {
   thought: string;
@@ -30,7 +30,7 @@ export class ReActAgent {
       // 1. 프롬프트 생성 (이전 단계 context 포함)
       const prompt = this.promptTemplate.format({
         question,
-        context
+        context,
       });
       // 2. LLM 호출 (Thought/Action 생성)
       const llmResponse = await this.llm.generate(prompt);
@@ -40,10 +40,10 @@ export class ReActAgent {
       // 3. LLM 응답 파싱 (예시: Action: tool=weather, input={city: '서울'})
       // 실제 구현에서는 LLM 응답 포맷에 맞게 파싱 필요
       // 여기서는 간단히 "Action: tool=weather, input=서울" 형태를 가정
-      const lines = llmResponse.split('\n').map(line => line.trim());
-      const answerLine = lines.find(line => line.startsWith('Answer:'));
+      const lines = llmResponse.split("\n").map((line) => line.trim());
+      const answerLine = lines.find((line) => line.startsWith("Answer:"));
       if (answerLine) {
-        answer = answerLine.replace('Answer:', '').trim();
+        answer = answerLine.replace("Answer:", "").trim();
         done = true;
         context += `\n${llmResponse}`;
         break;
@@ -51,7 +51,7 @@ export class ReActAgent {
 
       let actionMatch = llmResponse.match(/Action: tool=(\w+), input=(.+)/);
       let observation = "";
-      
+
       if (actionMatch) {
         const toolName = actionMatch[1];
         const toolInput = actionMatch[2];

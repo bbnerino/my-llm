@@ -1,7 +1,7 @@
 import { WeatherTool, CalculatorTool } from "./tool/tool";
 import { ToolRegistry } from "./tool/toolRegistry";
 
-import { PromptTemplate } from "./prompt/promptTemplate";
+import { PromptTemplate } from "./agent/promptTemplate";
 import { ReActAgent } from "./agent/agent";
 
 // 1. Tool 등록
